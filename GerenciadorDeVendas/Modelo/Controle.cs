@@ -19,7 +19,7 @@ namespace ProjetoLogin.Modelo
             if (!loginDao.mensagem.Equals("")) // Se a mensagem de erro for diferente de vazio
             {
                 this.mensagem = loginDao.mensagem; // Atribui a mensagem de erro à variável mensagem
-                this.idUsuario = loginDao.getIDUsuario(login, senha);
+                this.idUsuario = loginDao.recuperarId(login);
 
             }
             return tem; // Retorna a variável tem (true ou false)

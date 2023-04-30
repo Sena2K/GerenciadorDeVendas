@@ -16,35 +16,33 @@ namespace GerenciamentoDeVendas.DAO
         SqlDataReader dr; // Objeto para leitura dos resultados da consulta
 
 
-        //recuperar id do usuario
 
-        public int getIDUsuario(string usuario, string senha)
+        public int recuperarId(string usuario)
         {
-            int idUsuario = 0;
-            cmd.CommandText = "select IdLogin from Login where Usuario = @login and Senha = @senha";
-            cmd.Parameters.AddWithValue("@login", usuario);
-            cmd.Parameters.AddWithValue("@senha", senha);
+            int id = -1; // Valor padrão para quando não encontrar o usuário
+                         // Comando SQL para recuperar o ID do usuário
+            cmd.CommandText = "select IdLogin from Login where Usuario = @usuario";
+            cmd.Parameters.AddWithValue("@usuario", usuario);
 
             try
             {
-                cmd.Connection = con.conectar();
-                dr = cmd.ExecuteReader();
-                if (dr.HasRows)
+                cmd.Connection = con.conectar(); // Abrir conexão com o banco de dados
+                dr = cmd.ExecuteReader(); // Executar a consulta
+                if (dr.Read()) // Se encontrar um resultado na consulta
                 {
-                    dr.Read();
-                    idUsuario = Convert.ToInt32(dr["IdLogin"]); // atribui o valor do IdLogin à variável idUsuario
+                    id = (int)dr["IdLogin"]; // Recupera o valor da coluna "IdLogin"
                 }
-                con.desconectar();
-                dr.Close();
+                con.desconectar(); // Fechar a conexão com o banco de dados
+                dr.Close(); // Fechar o objeto de leitura dos resultados
             }
             catch (SqlException)
             {
-                this.mensagem = "Erro com o banco de dados";
+                this.mensagem = "Erro com o banco de dados"; // Atribuir mensagem de erro
             }
 
-            return idUsuario;
+            return id; // Retorna o ID do usuário ou o valor padrão se não encontrar
         }
-        // Método para verificar o login
+
         public bool verificarLogin(string usuario, string senha)
         {
             // Comandos SQL para verificar o login
@@ -101,5 +99,46 @@ namespace GerenciamentoDeVendas.DAO
             }
             return mensagem; // Retorna a mensagem de erro ou sucesso
         }
+        public string cadastrarCliente(string nome, string endereco, string cidade, string estado, string cep, string telefone, string email, DateTime dataNascimento, string cpf, string cnpj)
+        {
+            bool tem = false;
+            if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(endereco) || string.IsNullOrEmpty(cidade) || string.IsNullOrEmpty(estado) || string.IsNullOrEmpty(cep) || string.IsNullOrEmpty(telefone) || string.IsNullOrEmpty(email) || dataNascimento == null) 
+            {
+                this.mensagem = "Por favor, preencha todos os campos obrigatórios."; // Verifica se algum campo obrigatório está vazio ou nulo
+            }
+            else
+            {
+                // Comandos SQL para inserir um novo cliente
+                cmd.CommandText = "insert into Clientes values (@nome, @endereco, @cidade, @estado, @cep, @telefone, @email, @dataNascimento, @cpf, @cnpj)";
+                cmd.Parameters.AddWithValue("@nome", nome);
+                cmd.Parameters.AddWithValue("@endereco", endereco);
+                cmd.Parameters.AddWithValue("@cidade", cidade);
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@cep", cep);
+                cmd.Parameters.AddWithValue("@telefone", telefone);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@dataNascimento", dataNascimento);
+                cmd.Parameters.AddWithValue("@cpf", cpf);
+                cmd.Parameters.AddWithValue("@cnpj", cnpj);
+
+                try
+                {
+                    cmd.Connection = con.conectar(); // Abrir conexão com o banco de dados
+                    cmd.ExecuteNonQuery(); // Executar o comando SQL
+                    con.desconectar(); // Fechar a conexão com o banco de dados
+                    this.mensagem = "Cliente cadastrado com sucesso."; // Atribuir mensagem de sucesso
+                    tem = true; // Altera o valor da variável "tem" para true
+                }
+                catch (SqlException ex)
+                {
+                    this.mensagem = "Erro ao cadastrar cliente. Detalhes: " + ex.Message;
+                }
+
+
+            }
+            return mensagem; // Retorna a mensagem de erro ou sucesso
+        }
+
+
     }
 }

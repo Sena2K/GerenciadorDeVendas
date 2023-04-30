@@ -14,16 +14,18 @@ namespace GerenciadorDeVendas
         private void btnEntrar_Click(object sender, EventArgs e)
         {
             Controle controle = new Controle();
+            LoginDaoComandos dao  = new LoginDaoComandos();
             controle.acessar(txtEmail.Text, txtSenha.Text);
 
             if (controle.mensagem.Equals(""))
             {
                 if (controle.tem)
                 {
+                    int idUsuario = dao.recuperarId(txtEmail.Text);
                     MessageBox.Show("Logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    BemVindo bv = new BemVindo(z);
+                    BemVindo bv = new BemVindo(idUsuario);
                     bv.Show();
-                }
+                } 
                 else
                 {
                     MessageBox.Show("Login não encontrado, verifique login e senha", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
