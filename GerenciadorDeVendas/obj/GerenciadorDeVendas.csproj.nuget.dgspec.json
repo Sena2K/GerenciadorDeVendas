@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\muril\\source\\repos\\GerenciadorDeVendas\\GerenciadorDeVendas\\GerenciadorDeVendas.csproj": {}
+    "C:\\Users\\muril\\Source\\Repos\\GerenciadorDeVendassss\\GerenciadorDeVendas\\GerenciadorDeVendas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\muril\\source\\repos\\GerenciadorDeVendas\\GerenciadorDeVendas\\GerenciadorDeVendas.csproj": {
+    "C:\\Users\\muril\\Source\\Repos\\GerenciadorDeVendassss\\GerenciadorDeVendas\\GerenciadorDeVendas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\muril\\source\\repos\\GerenciadorDeVendas\\GerenciadorDeVendas\\GerenciadorDeVendas.csproj",
+        "projectUniqueName": "C:\\Users\\muril\\Source\\Repos\\GerenciadorDeVendassss\\GerenciadorDeVendas\\GerenciadorDeVendas.csproj",
         "projectName": "GerenciadorDeVendas",
-        "projectPath": "C:\\Users\\muril\\source\\repos\\GerenciadorDeVendas\\GerenciadorDeVendas\\GerenciadorDeVendas.csproj",
+        "projectPath": "C:\\Users\\muril\\Source\\Repos\\GerenciadorDeVendassss\\GerenciadorDeVendas\\GerenciadorDeVendas.csproj",
         "packagesPath": "C:\\Users\\muril\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\muril\\source\\repos\\GerenciadorDeVendas\\GerenciadorDeVendas\\obj\\",
+        "outputPath": "C:\\Users\\muril\\Source\\Repos\\GerenciadorDeVendassss\\GerenciadorDeVendas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\muril\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -41,6 +41,30 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "GrapeCity.DataVisualization.Chart": {
+              "target": "Package",
+              "version": "[0.4.118, )"
+            },
+            "Grapecity.DataVisualization": {
+              "target": "Package",
+              "version": "[0.1.248, )"
+            },
+            "HIC.System.Windows.Forms.DataVisualization": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.2.8, )"
+            },
+            "NETStandard.Library": {
+              "target": "Package",
+              "version": "[2.0.3, )"
+            },
+            "Syncfusion.Gauge.Windows": {
+              "target": "Package",
+              "version": "[21.1.41, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"

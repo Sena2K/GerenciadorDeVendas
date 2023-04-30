@@ -72,32 +72,56 @@ namespace GerenciamentoDeVendas.DAO
         // Método para cadastrar um novo login
         public string cadastrar(string email, string senha, string confSenha)
         {
+            string caracteresEspeciais = "!@#$%¨&*()_+-={}[]\\|;:'\"<>,.?/";
             tem = false; // Reinicia o valor da variável "tem"
-            // Comandos SQL para inserir um novo login
-            if (senha.Equals(confSenha)) // Se as senhas coincidirem
-            {
-                cmd.CommandText = "insert into Login values (@e, @s);";
-                cmd.Parameters.AddWithValue("@e", email);
-                cmd.Parameters.AddWithValue("@s", senha);
 
-                try
-                {
-                    cmd.Connection = con.conectar(); // Abrir conexão com o banco de dados
-                    cmd.ExecuteNonQuery(); // Executar o comando SQL
-                    con.desconectar(); // Fechar a conexão com o banco de dados
-                    this.mensagem = "Cadastrado com sucesso"; // Atribuir mensagem de sucesso
-                    tem = true; // Altera o valor da variável "tem" para true
-                }
-                catch (SqlException)
-                {
-                    this.mensagem = "Erro com o banco de dados."; // Atribuir mensagem de erro
-                }
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha) || string.IsNullOrEmpty(confSenha))
+            {
+                this.mensagem = "Por favor, preencha todos os campos obrigatórios.";
+            }
+            else if (senha.Length < 8 || !senha.Any(char.IsUpper) || !senha.Any(char.IsDigit) || !caracteresEspeciais.Any(senha.Contains))
+            {
+                this.mensagem = "A senha deve ter pelo menos 8 caracteres, pelo menos uma letra maiúscula, pelo menos um dígito e pelo menos um caractere especial.";
+            }
+            else if (senha != confSenha)
+            {
+                this.mensagem = "Senhas não correspondem";
             }
             else
             {
-                this.mensagem = "Senhas não correspondem"; // Atribuir mensagem de erro
+                try
+                {
+                    // Verifica se o e-mail já está cadastrado no banco de dados
+                    cmd.CommandText = "select count(*) from Login where Usuario = @e";
+                    cmd.Parameters.AddWithValue("@e", email);
+                    cmd.Connection = con.conectar();
+                    int count = (int)cmd.ExecuteScalar();
+                    con.desconectar();
+
+                    if (count > 0)
+                    {
+                        this.mensagem = "Este e-mail já está cadastrado.";
+                    }
+                    else
+                    {
+                        // Insere o novo registro no banco de dados
+                        cmd.CommandText = "insert into Login values (@e, @s);";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@e", email);
+                        cmd.Parameters.AddWithValue("@s", senha);
+                        cmd.Connection = con.conectar();
+                        cmd.ExecuteNonQuery();
+                        con.desconectar();
+                        this.mensagem = "Cadastrado com sucesso";
+                        tem = true;
+                    }
+                }
+                catch (SqlException)
+                {
+                    this.mensagem = "Erro com o banco de dados.";
+                }
             }
-            return mensagem; // Retorna a mensagem de erro ou sucesso
+            return mensagem;
         }
         public string cadastrarCliente(string nome, string endereco, string cidade, string estado, string cep, string telefone, string email, DateTime dataNascimento, string cpf, string cnpj)
         {

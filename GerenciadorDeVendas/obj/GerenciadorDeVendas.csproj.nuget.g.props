@@ -12,4 +12,11 @@
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="C:\Users\muril\.nuget\packages\" />
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.netcore.app\2.2.8\build\netcoreapp2.2\Microsoft.NETCore.App.props" Condition="Exists('$(NuGetPackageRoot)microsoft.netcore.app\2.2.8\build\netcoreapp2.2\Microsoft.NETCore.App.props')" />
+  </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgSyncfusion_Shared_Base Condition=" '$(PkgSyncfusion_Shared_Base)' == '' ">C:\Users\muril\.nuget\packages\syncfusion.shared.base\21.1.41</PkgSyncfusion_Shared_Base>
+    <PkgSyncfusion_Gauge_Windows Condition=" '$(PkgSyncfusion_Gauge_Windows)' == '' ">C:\Users\muril\.nuget\packages\syncfusion.gauge.windows\21.1.41</PkgSyncfusion_Gauge_Windows>
+  </PropertyGroup>
 </Project>

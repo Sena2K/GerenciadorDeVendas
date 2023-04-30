@@ -1,25 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="Apresentacao - Cópia\BemVindo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Apresentacao - Cópia\CadastreSe.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Apresentacao - Cópia\CadastroDeProdutos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Apresentacao - Cópia\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Apresentacao\BemVindo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Apresentacao\CadastreSe.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Apresentacao\CadastroClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Apresentacao\CadastroProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Apresentacao\EditarProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Apresentacao\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Apresentacao\ListagemProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Apresentacao\relatorioDeVendas.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
